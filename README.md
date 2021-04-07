@@ -2,18 +2,16 @@
 
 ## users テーブル
 
-| Column            | Type    | Options     |
-| ----------------- | ------- | ----------- |
-| nickname          | string  | null: false |
-| email             | string  | null: false |
-| password          | string  | null: false |
-| last_name         | string  | null: false |
-| first_name        | string  | null: false |
-| last_name_kana    | string  | null: false |
-| first_name_kana   | string  | null: false |
-| birthday_year_id  | integer | null: false |
-| birthday_month_id | integer | null: false |
-| birthday_day_id   | integer | null: false |
+| Column             | Type    | Options                   |
+| ------------------ | ------- | ------------------------- |
+| nickname           | string  | null: false               |
+| email              | string  | null: false, unique: true |
+| encrypted_password | string  | null: false               |
+| last_name          | string  | null: false               |
+| first_name         | string  | null: false               |
+| last_name_kana     | string  | null: false               |
+| first_name_kana    | string  | null: false               |
+| birthday_id        | date    | null: false               |
 
 ### Association
 
@@ -31,18 +29,18 @@
 | ------------------- | ---------- | ------------------------------ |
 | title               | string     | null: false                    |
 | text                | text       | null: false                    |
-| goods_category_id   | string     | null: false                    |
-| goods_condition_id  | string     | null: false                    |
-| shipping_charges_id | string     | null: false                    |
-| shipping_area_id    | string     | null: false                    |
-| shipping_days_id    | string     | null: false                    |
+| goods_category_id   | integer    | null: false                    |
+| goods_condition_id  | integer    | null: false                    |
+| shipping_charges_id | integer    | null: false                    |
+| shipping_area_id    | integer    | null: false                    |
+| shipping_days_id    | integer    | null: false                    |
 | price               | integer    | null: false                    |
-| users               | references | null: false, foreign_key: true |
+| user                | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :users
-- belongs_to :buys
+- belongs_to :user
+- has_one :buy
 - belongs_to :goods
 - belongs_to :shipping
 
@@ -54,17 +52,14 @@
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| creditcard_number | integer    | null: false                    |
-| exp_month         | integer    | null: false                    |
-| exp_year          | integer    | null: false                    |
-| security_code     | integer    | null: false                    |
-| users             | references | null: false, foreign_key: true |
-| items             | references | null: false, foreign_key: true |
+| user_id           | references | null: false, foreign_key: true |
+| item_id           | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :users
-- belongs_to :items
+- belongs_to :user
+- belongs_to :item
+- belongs_to :shipping_address
 
 
 
@@ -72,16 +67,16 @@
 
 ## shipping_address テーブル
 
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| postal_code   | integer    | null: false                    |
-| prefecture_id | string     | null: false                    |
-| city          | string     | null: false                    |
-| address       | string     | null: false                    |
-| building_name | string     |                                |
-| phone_number  | integer    | null: false                    |
-| buys          | references | null: false, foreign_key: true |
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| postal_code      | string     | null: false                    |
+| shipping_area_id | integer    | null: false                    |
+| city             | string     | null: false                    |
+| address          | string     | null: false                    |
+| building_name    | string     |                                |
+| phone_number     | string     | null: false                    |
+| buy              | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :buys
+- belongs_to :buy
