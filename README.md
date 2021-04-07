@@ -11,13 +11,12 @@
 | first_name         | string  | null: false               |
 | last_name_kana     | string  | null: false               |
 | first_name_kana    | string  | null: false               |
-| birthday_id        | date    | null: false               |
+| birthday           | date    | null: false               |
 
 ### Association
 
 - has_many :items
 - has_many :buys
-- belongs_to :birthday
 
 
 
@@ -41,8 +40,6 @@
 
 - belongs_to :user
 - has_one :buy
-- belongs_to :goods
-- belongs_to :shipping
 
 
 
@@ -50,16 +47,16 @@
 
 ## buys テーブル
 
-| Column            | Type       | Options                        |
-| ----------------- | ---------- | ------------------------------ |
-| user_id           | references | null: false, foreign_key: true |
-| item_id           | references | null: false, foreign_key: true |
+| Column         | Type       | Options                        |
+| -------------- | ---------- | ------------------------------ |
+| user           | references | null: false, foreign_key: true |
+| item           | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
-- belongs_to :shipping_address
+- has_one :shipping_address
 
 
 
