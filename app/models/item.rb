@@ -2,12 +2,13 @@ class Item < ApplicationRecord
 
   belongs_to :user
   has_one_attached :image
-  extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :goods_category
-  belongs_to :goods_condition
-  belongs_to :shipping_charges
-  belongs_to :shipping_area
-  belongs_to :shipping_days
+
+  extend ActiveHash::Associations::ActiveRecordExtensions 
+  belongs_to_active_hash :goods_category
+  belongs_to_active_hash :goods_condition
+  belongs_to_active_hash :shipping_charge
+  belongs_to_active_hash :shipping_area
+  belongs_to_active_hash :shipping_day
 
   with_options presence: true do
     validates :image
