@@ -36,7 +36,7 @@ RSpec.describe User, type: :model do
         it 'emailに@が存在しない場合登録できない' do
           @user.email = 'abcdefg'
           @user.valid?
-          expect(@user.errors.full_messages).to include("メールアドレスに「@」を挿入してください。")
+          expect(@user.errors.full_messages).to include("Email is invalid")
         end
 
         it 'passwordは半角英語のみでは登録できない' do
