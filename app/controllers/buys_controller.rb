@@ -9,10 +9,11 @@ class BuysController < ApplicationController
   end
 
   def create
+    @item = Item.find(params[:item_id])
     @buy_form = BuyForm.new(buy_params)
     if @buy_form.valid?
       @buy_form.save
-      redirect_to root_path
+      redirect_to root_path(@buy_form)
     else
       render :new
     end
