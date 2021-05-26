@@ -19,28 +19,10 @@ RSpec.describe BuyForm, type: :model do
 
     context '商品が購入できない時' do
 
-      it '郵便番号が空では商品を購入できない' do
-        @buy_form.postal_code = ''
+      it "tokenが空では登録できないこと" do
+        @buy_form.token = ''
         @buy_form.valid?
-        expect(@buy_form.errors.full_messages).to include("Postal code can't be blank")
-      end
-
-      it '郵便番号はハイフンを含んだ正しい形式でないと商品を購入できない' do
-        @buy_form.postal_code = '1112222'
-        @buy_form.valid?
-        expect(@buy_form.errors.full_messages).to include("Postal code is invalid")
-      end
-
-      it '郵便番号が全角数字では商品を購入できない' do
-        @buy_form.postal_code = '１１１-２２２２'
-        @buy_form.valid?
-        expect(@buy_form.errors.full_messages).to include("Postal code is invalid")
-      end
-
-      it '郵便番号が半角英文字では商品を購入できない' do
-        @buy_form.postal_code = 'aaa-aaaa'
-        @buy_form.valid?
-        expect(@buy_form.errors.full_messages).to include("Postal code is invalid")
+        expect(@buy_form.errors.full_messages).to include("Token can't be blank")
       end
 
       it '郵便番号が半角英数字混合では商品を購入できない' do
