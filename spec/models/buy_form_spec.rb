@@ -50,7 +50,7 @@ RSpec.describe BuyForm, type: :model do
       end
 
       it '都道府県が未選択では商品を購入できないこと' do
-        @buy_form.shipping_area_id = '1'
+        @buy_form.shipping_area_id = 1
         @buy_form.valid?
         expect(@buy_form.errors.full_messages).to include("Shipping area must be other than 1")
       end
