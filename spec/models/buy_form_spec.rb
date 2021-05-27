@@ -49,6 +49,18 @@ RSpec.describe BuyForm, type: :model do
         expect(@buy_form.errors.full_messages).to include("Postal code is invalid")
       end
 
+      it '郵便番号が空では商品を購入できないこと' do
+        @buy_form.postal_code = ''
+        @buy_form.valid?
+        expect(@buy_form.errors.full_messages).to include("Postal code can't be blank")
+      end
+
+      it '郵便番号にハイフンが無いと商品を購入できないこと' do
+        @buy_form.postal_code = '1112222'
+        @buy_form.valid?
+        expect(@buy_form.errors.full_messages).to include("Postal code is invalid")
+      end
+
       it '都道府県が未選択では商品を購入できないこと' do
         @buy_form.shipping_area_id = 1
         @buy_form.valid?

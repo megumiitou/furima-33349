@@ -1,9 +1,6 @@
 class BuysController < ApplicationController
   before_action :authenticate_user!
   before_action :buy_user
-
-  def index
-  end
   
   def new
     @buy_form = BuyForm.new
@@ -39,6 +36,8 @@ class BuysController < ApplicationController
   def buy_user
     @item = Item.find(params[:item_id])
     if @item.user_id == current_user.id
+      redirect_to root_path
+    elsif user_signed_in? && @item.buy.present?
       redirect_to root_path
     end
   end

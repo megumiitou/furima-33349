@@ -6,6 +6,6 @@ FactoryBot.define do
     city                      {"sample"}
     address                   {"11"}
     building_name             {"building"}
-    phone_number              {11111111111}
+    phone_number              {"11111111111"}
   end
 end
