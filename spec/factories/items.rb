@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :item do
-    title               {Faker::String.random(length: 1..40)}
-    text                {Faker::String.random(length: 1..1000)}
+    title               {"sample"}
+    text                {"sample explain"}
     goods_category_id   {2}
     goods_condition_id  {2}
     shipping_charge_id  {2}

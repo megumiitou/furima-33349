@@ -1,9 +1,5 @@
-# class Buy < ApplicationRecord
-  # belongs_to :user
-  # belongs_to :item
-
-  # with_options presence: true do
-    # validates :user
-    # validates :item
-  # end
-# end
+class Buy < ApplicationRecord
+  belongs_to :user
+  has_one :item
+  has_one :shipping_address
+end
