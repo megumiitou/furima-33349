@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item, except: [:index, :new, :create]
-  before_action :item_user, except: [:index, :new, :create, :show]
+  before_action :item_user, only: [:edit, :update, :destroy]
+  before_action :item_buy_user, only: [:edit, :update, :destroy]
   
   def index
     @items = Item.includes(:user).order("created_at DESC")
@@ -50,13 +51,15 @@ class ItemsController < ApplicationController
   end
 
   def item_user
-    if user_signed_in? && @item.buy.present?
-      if @item.user_id == current_user.id
-        redirect_to root_path
-      end
-      unless @item.user_id == current_user.id
-        redirect_to root_path
-      end
+    unless @item.user_id == current_user.id
+      redirect_to root_path
     end
   end
+
+  def item_buy_user
+    if (@item.user_id == current_user.id) || @item.buy.present?
+      redirect_to root_path
+    end
+  end
+
 end
